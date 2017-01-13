@@ -1,3 +1,4 @@
+
 package com.niit.Shoppingbackend.config;
 
 import java.util.Properties;
@@ -10,9 +11,17 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+//import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import com.niit.Shoppingbackend.dao.CategoryDAO;
+import com.niit.Shoppingbackend.dao.CategoryDAOImpl;
+import com.niit.Shoppingbackend.dao.SupplierDAO;
+import com.niit.Shoppingbackend.dao.SupplierDAOImpl;
 import com.niit.Shoppingbackend.dao.UserDAO;
 import com.niit.Shoppingbackend.dao.UserDAOImpl;
+import com.niit.Shoppingbackend.modal.Category;
+import com.niit.Shoppingbackend.modal.Product;
+import com.niit.Shoppingbackend.modal.Supplier;
 import com.niit.Shoppingbackend.modal.User;
 
 @Configuration
@@ -21,13 +30,15 @@ import com.niit.Shoppingbackend.modal.User;
 public class ApplicationContextconfig 
 
 {
+	//private org.hibernate.cfg.Configuration sessionBuider;
+
 	@Bean(name = "dataSource")
 	public DataSource getDataSource() 
 	
 	{
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:tcp://localhost/~/DT12");
+		dataSource.setUrl("jdbc:h2:tcp://localhost/~/Bhavyadb");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
 		System.out.println("data source");
@@ -43,7 +54,7 @@ public class ApplicationContextconfig
 		properties.put("hibernate.hbm2ddl.auto", "update");
 		// treat every session as a thread
 		properties.put("hibernate.current_session_context_class", "thread");
-		System.out.println("hbernate properties");
+		System.out.println("hibernate properties");
 		return properties;
 		
 	}
@@ -57,7 +68,10 @@ public class ApplicationContextconfig
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
         sessionBuilder.addAnnotatedClass(User.class);
-		System.out.println("session factory ");
+        sessionBuilder.addAnnotatedClass(Supplier.class);
+        sessionBuilder.addAnnotatedClass(Category.class);
+        sessionBuilder.addAnnotatedClass(Product.class);
+        System.out.println(" session factory ");
 		return sessionBuilder.buildSessionFactory();
 		
 	}
@@ -76,13 +90,14 @@ public class ApplicationContextconfig
 	
 	  @Autowired
 	  
-	  @Bean(name = "userDAO") public UserDAO getUserDetailsDAO(SessionFactory
-	  sessionFactory) 
+	  @Bean(name = "userDAO")
+	  public UserDAO getUserDetailsDAO(SessionFactory sessionFactory) 
 	  
 	  {
 	  
 	  System.out.println("user dao wired "); 
 	  return new UserDAOImpl(sessionFactory);
+	  
 	  }
 	  
 	  @Autowired
@@ -91,9 +106,58 @@ public class ApplicationContextconfig
 	  public User getUserDetails() 
 	  
 	  {
+		  
 	  System.out.println("user wired");
 	  return new User(); 
+	  
 	  }
-	 
+ @Autowired
+	  
+	  @Bean(name = "categoryrDAO")
+ 		public CategoryDAO getCategoryDAO(SessionFactory sessionFactory) 
+	  
+	  {
+	  
+	  System.out.println("category dao wired "); 
+	  return new CategoryDAOImpl(sessionFactory);
+	  
+	  }
+	  
+	  @Autowired
+	  
+	  @Bean(name = "category")
+	  public Category geCategoryDetails() 
+	  
+	  {
+		  
+	  System.out.println("category wired");
+	  return new Category(); 
+	  
+	  }
+
+ @Autowired
+	  
+	  @Bean(name = "supplerDAO") 
+ 	public SupplierDAO getSupplierDetailsDAO(SessionFactory sessionFactory) 
+	  
+	  {
+	  
+	  System.out.println("supplier dao wired "); 
+	  return new SupplierDAOImpl(sessionFactory);
+	  
+	  }
+	  
+	  @Autowired
+	  
+	  @Bean(name = "supplier")
+	  public Supplier getSupplierDetails() 
+	  
+	  {
+		  
+	  System.out.println("user wired");
+	  return new Supplier();
+	  
+	  }
+
 			 
 }
