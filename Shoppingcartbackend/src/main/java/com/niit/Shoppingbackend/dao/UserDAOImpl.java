@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.Shoppingbackend.modal.User;
 
 
+
 @Repository(value = "userDAO")
 @EnableTransactionManagement
-
 public class UserDAOImpl implements UserDAO 
 
 {
@@ -26,6 +26,7 @@ public class UserDAOImpl implements UserDAO
 
 	public UserDAOImpl(SessionFactory sessionFactory) 
 	{
+		
 		super();
 		this.sessionFactory = sessionFactory;
 	}
@@ -35,7 +36,7 @@ public class UserDAOImpl implements UserDAO
 	
 	{
 		
-		String hql = "from User where id=" + id + " and " + " name =" + password;
+		String hql = "from User where user_id=" + id + " and " + " username ='" + password+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 		@SuppressWarnings("unchecked")
@@ -49,10 +50,9 @@ public class UserDAOImpl implements UserDAO
 			
 		}
 		
-		
-		  return false;
+		 return false;
 		  
-	}
+	    }
 
 	@Transactional
 	public void saveOrUpdate(User user) 
@@ -70,8 +70,7 @@ public class UserDAOImpl implements UserDAO
 	
 	{
 	
-		
-       return null;
+		 return null;
        
 	}
 		
@@ -82,9 +81,10 @@ public class UserDAOImpl implements UserDAO
 	{
 
 		List<User> list = (List<User>) sessionFactory.getCurrentSession().createCriteria(User.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+				       .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
-		return list;
+		 return list;
+		
 	}
 
 	public UserDAOImpl() 
@@ -101,6 +101,12 @@ public class UserDAOImpl implements UserDAO
 
 		sessionFactory.getCurrentSession().delete(email);
 
+	}
+
+
+	public boolean isValidate(String name, String password) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 
