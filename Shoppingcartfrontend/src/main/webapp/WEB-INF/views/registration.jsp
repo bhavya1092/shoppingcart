@@ -1,81 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Register Here</title>
-<style>
-
-
-<h2 style"background-color":rgb(226, 51, 252)">
-Background  color set by using  rgb(226 ,51 ,252)
-</h2>
-
-input [type=username], [type=password] ,[type=confirm password], [type=email],[type=First name],[type=Last name]
-
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-</style>
 </head>
 <body>
-<div class="container">
-	<form class="form-centre" id="registration" method='post' action='register.php'>
+      <div class="container">
+	<form:form  method='post' action="addus" commandName="user">
 		<fieldset>
 			<legend>Registration Form</legend>
 			<div class="control-group">
 				<label class="control-label">Username</label>
 				<div class="controls">
-					<input type="text" id="user_name" name="user_name">
+					<form:input type="text" path="username"></form:input>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Password</label>
 				<div class="controls">
-					<input type="text" id="password" name="password1">
+					<form:input type="text" path="password"></form:input>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Confirm Password</label>
 				<div class="controls">
-					<input type="text" id="confirmpassword" name="password2">
+					<form:input type="text" path="cpassword"></form:input>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Email</label>
 				<div class="controls">
-					<input type="text" id="email" name="email">
+					<form:input type="text" path="email"></form:input>
+					</div>
 				</div>
-				</div>
-			<div class="control-group">
-				<label class="control-label">First name</label>
+				<div class="control-group">
+				<label class="control-label">Phno</label>
 				<div class="controls">
-				<input type="text" id="Firstname" name="Firstname">
-				</div>
-			</div>
-		   </div>
-		   <div class="control-group">
-		  <label class="control-label">Last name</label>
-		  <div class="controls">
-		  <input type="text" id="Lastname" name="Lastname">
-		  </div>
-		  <ul class="nav navbar-nav">
-		  </ul>
-		  
-      <li class="active"><a href="#"></a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Gender">Gender<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="Male">Male</a></li>
-          <li><a href="Female">Female</a></li>
-          </ul>
-			<div class="control-group">
-				<label class="control-label"></label>
+					<form:input type="text" path="phno"></form:input>
+						</div>
+					</div>
+					
+					<div class="control-group">
+				<label class="control-label">Submit</label>
 				<div class="controls">
-					<button type="submit" class="btn btn-success" >Submit</button>
-				</div>
+					<form:input type="text" path=""></form:input>
+					</div>
+					</div>
+					<div class="control-group">
+				<label class="control-label">button</label>
+				<div class="controls">
+					<form:input type="text" path=""></form:input>
+					</div>
+					</div>
+					</fieldset>
+				</form:form>
 			</div>
-		</fieldset>
-	</form>
-</div>
 </body>
 </html>
