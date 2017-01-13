@@ -63,15 +63,19 @@ public class CategoryDAOImpl implements CategoryDAO
 	public Category get(int id)
 	
 	{
-		String hql = "from Category where id=" ;
+		String hql = "from Category where id="+id
+				;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 		@SuppressWarnings("unchecked")
 		List<Category> list = (List<Category>) query.list();
 		
 		if (list != null && !list.isEmpty()) 
+		{
 			
-		return null;
+		}
+			
+		return list.get(0);
 		
 	}
 
