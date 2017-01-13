@@ -37,11 +37,11 @@ public class ProductDAOImpl implements ProductDAO
 
 	public void saveOrUpdate(Product product)
 	{
+		
 		Session s= sessionFactory.getCurrentSession();
 		Transaction tx=s.beginTransaction();
 		s.saveOrUpdate(product);
 		tx.commit();
-		
 		
 	}
 
@@ -56,15 +56,20 @@ public class ProductDAOImpl implements ProductDAO
 
 	public Product get(int id) 
 	{
-		String hql = "from Product where id=" ;
+		String hql = "from Product where id=" +id;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 		@SuppressWarnings("unchecked")
 		List<Product> list = (List<Product>) query.list();
 		
 		if (list != null && !list.isEmpty()) 
+		{
 			
-		return null;
+			
+		}
+		
+			
+		return list.get(0);
 	}
 
 	public List<Product> list() 
