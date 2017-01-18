@@ -1,12 +1,11 @@
+package com.niit;
 
-
-
-import com.niit.Shoppingbackend.dao.UserDAO;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class UserTest 
 
 {
-	
+
 	static AnnotationConfigApplicationContext context;
 
 
@@ -18,15 +17,17 @@ public class UserTest
 		context = new AnnotationConfigApplicationContext();
 		context.scan("com");
 		context.refresh();
-		UserDAO userDAO=(UserDAO)context.getBean("userDAO");
+		/*UserDAO userDAO=(UserDAO)context.getBean("userDAO");
 		User user=(User)context.getBean("user");
-		user.setUsername("s001");
-		user.setPassword("1234");
-		user.setConfirmpassword("1234");
-		user.setEmail("ss@yahoo.com");
+		user.setUsername("Bhavya");
+		user.setPassword("Bhavya");
+		user.setCpassword("Bhavya");
+		user.setEmail("ss1@yahoo.com");
 		user.setPhno("12345678");
 		user.setEnabled("true");
+		user.setRole("ROLE_ADMIN");
 		userDAO.saveOrUpdate(user);
+	*/
 		
 	}
 	
@@ -36,3 +37,6 @@ public class UserTest
 
 
 	
+	
+
+
