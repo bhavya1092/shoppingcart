@@ -1,44 +1,64 @@
 package com.niit.front.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController
+public class HomeController<CategoryDAO> 
 
 {
+
+	@Autowired
+    CategoryDAO categoryDAO;
 	@RequestMapping("/")
 	public String showHomePage()
 	{
-		return "HomePage";
+		
+		return "AdminHome";
 	}
 	
-@RequestMapping("/AboutUs")
-public String showAboutUs()
+    @RequestMapping("/AboutUs")
+    public String showAboutUs()
+    
 	{
-		return "AboutUs";
+	     return "AboutUs";
 	}
 
      
-@RequestMapping("/ContactUs")
-public String showContactUs()
-{
+     @RequestMapping("/ContactUs")
+      public String showContactUs()
+    
+    
+  {
+    	 
 	return "ContactUs";
-}
+  
+  }
 
 
-@RequestMapping("/registration")
-public String showregistration()
-{
-	return "registration";
-}
-
-
-@RequestMapping("/login")
-public String showlogin()
-{
+       @RequestMapping("/login")
+       public String showlogin()
+   
+  {
+	
 	return "login";
-}
- 
-     
+	
+  }
+       /*@RequestMapping("/AddCategory")
+		public ModelAndView ShowAddCategory(Model model) 
+		
+		{
+			ModelAndView mv = new ModelAndView("AddCategory");
+
+			model.addAttribute("categoryList", categoryDAO.list());
+			System.out.println("added category details  in controller");
+
+			return mv;
+			
+		}
+
+*/     
+	
+	
 }
