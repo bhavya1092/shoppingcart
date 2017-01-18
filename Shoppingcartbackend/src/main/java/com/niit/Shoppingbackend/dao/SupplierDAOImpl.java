@@ -1,20 +1,19 @@
-package com.niit.Shoppingbackend.dao;
+package com.niit.shoppingbackend.Dao;
 
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import com.niit.Shoppingbackend.modal.Category;
-import com.niit.Shoppingbackend.modal.Supplier;
+import org.springframework.transaction.annotation.Transactional;
+import com.niit.shoppingbackend.model.Supplier;
 
 
-
-@Repository( value ="supplierDAO")
+@Repository (value="supplierDAO")
 @EnableTransactionManagement
 
 public class SupplierDAOImpl implements SupplierDAO
@@ -73,12 +72,19 @@ public class SupplierDAOImpl implements SupplierDAO
 		return list.get(0);
 	}
 
+	@Transactional
 	public List<Supplier> list() 
 	
 	{
+		
+		Session s=sessionFactory.getCurrentSession();
+ 		Transaction t=s.beginTransaction();
+ 		//List<Supplier> list = (List<Supplier>) sessionFactory.getCurrentSession().createCriteria(Supplier.class)
 		List<Supplier> list = (List<Supplier>) sessionFactory.getCurrentSession().createCriteria(Supplier.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
+		
+		
+        t.commit();
 		return list;
 
 		

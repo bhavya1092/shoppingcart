@@ -1,18 +1,13 @@
-package com.niit.Shoppingbackend.dao;
+package com.niit.shoppingbackend.Dao;
 
 import java.util.List;
+import com.niit.shoppingbackend.model.User;
 
-import org.springframework.stereotype.Repository;
-
-import com.niit.Shoppingbackend.modal.User;
-
-
-
-@Repository
-public interface UserDAO 
+public interface UserDAO
 
 {
-	public boolean isValidate(int id, String password);
+
+	public boolean isValidate(String name, String password);
 
 	public void saveOrUpdate(User user);
 

@@ -1,22 +1,24 @@
-package com.niit.Shoppingbackend.dao;
+package com.niit.shoppingbackend.Dao;
 
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import com.niit.Shoppingbackend.modal.Product;
-import com.niit.Shoppingbackend.modal.Supplier;
+import org.springframework.transaction.annotation.Transactional;
+import com.niit.shoppingbackend.model.Product;
 
 @Repository(value ="productDAO")
 @EnableTransactionManagement
+
 public class ProductDAOImpl implements ProductDAO
 
 {
+	
 	
 	@Autowired
 	SessionFactory sessionFactory;
@@ -71,14 +73,21 @@ public class ProductDAOImpl implements ProductDAO
 			
 		return list.get(0);
 	}
-
+	
+	
+	@Transactional
 	public List<Product> list() 
 	
 	{
 		
-		List<Product> list = (List<Product>) sessionFactory.getCurrentSession().createCriteria(Product.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
+		
+		Session s=sessionFactory.getCurrentSession();
+		Transaction t=s.beginTransaction();
+		//List<Product> list = (List<Product>) sessionFactory.getCurrentSession().createCriteria(Product.class)
+			List<Product>list=(List<Product>)s.createCriteria(Product.class)
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+			
+			t.commit();
 		return list;
 
 		
@@ -87,4 +96,8 @@ public class ProductDAOImpl implements ProductDAO
 }
 
 	
+
+	
+	
+
 

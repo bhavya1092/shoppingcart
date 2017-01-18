@@ -1,17 +1,12 @@
-package com.niit.Shoppingbackend.dao;
+package com.niit.shoppingbackend.Dao;
 
 import java.util.List;
-import org.springframework.stereotype.Repository;
-import com.niit.Shoppingbackend.modal.Product;
+import com.niit.shoppingbackend.model.Product;
 
-@Repository
 public interface ProductDAO
-	
-	{
-		
-	
+
+{
 	    public Product getByName(String name);
-	    
 	    
 	    public void saveOrUpdate (Product product);
 		
@@ -21,8 +16,4 @@ public interface ProductDAO
 		
 		public List <Product> list();
 		
-	
-		
-
-	}
-
+}

@@ -1,16 +1,12 @@
-package com.niit.Shoppingbackend.dao;
+package com.niit.shoppingbackend.Dao;
 
 import java.util.List;
+import com.niit.shoppingbackend.model.Supplier;
 
-import org.springframework.stereotype.Repository;
+public interface SupplierDAO
 
-import com.niit.Shoppingbackend.modal.Supplier;
-
-@Repository
-public interface SupplierDAO 
-	
-	{
-		
+{
+	    
 	    public Supplier getByName(String name);
 	    
 		public void saveOrUpdate(Supplier supplier);
@@ -21,5 +17,4 @@ public interface SupplierDAO
 		
 		public List<Supplier> list();
 
-	}
-
+}
