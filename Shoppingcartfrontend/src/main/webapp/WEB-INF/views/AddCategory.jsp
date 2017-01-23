@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Category Page</title>
-
+</head>
+<style>
 <style type="text/css">
 .tg {
 	border-collapse: collapse;
@@ -61,14 +61,11 @@
 					</form:label></td>
 				<c:choose>
 					<c:when test="${!empty category.cat_id}">
-						<td><form:input path="cat_id" disabled="true" 
-
-readonly="true" />
+						<td><form:input path="cat_id" disabled="true" readonly="true" />
 						</td>
 					</c:when>
                    </c:choose>
-					
-			<tr>
+					<tr>
 			<form:input path="cat_id" hidden="true"  />
 				<td><form:label path="catname">
 						<spring:message text="Name" />
@@ -82,15 +79,13 @@ readonly="true" />
 				<td><form:input path="cat_description" required="true" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><c:if test="${!empty category.catname}">
+				<td colspan="2">
+				<c:if test="${!empty category.catname}">
 						<input type="submit"
-							value="<spring:message text="Edit 
-
-Category"/>" />
-					</c:if> <c:if test="${empty category.catname}">
-						<input type="submit" value="<spring:message 
-
-text="Add Category"/>" />
+							value="<spring:message text="Edit Category"/>" />
+					</c:if>
+				 <c:if test="${empty category.catname}">
+						<input type="submit" value="<spring:message text="Add Category"/>" />
 					</c:if></td>
 			</tr>
 		</table>
@@ -111,16 +106,10 @@ text="Add Category"/>" />
 					<td>${category.cat_id}</td>
 					<td>${category.catname}</td>
 					<td>${category.cat_description}</td>
-					<td><a href="<c:url value='category/edit/${category.cat_id}' 
-
-/>">Edit</a></td>
-					<td><a href="<c:url value='category/remove/
-
-${category.cat_id}' />">Delete</a></td>
+					<td><a href="<c:url value='category/edit/${category.cat_id}' />">Edit</a></td>
+					<td><a href="<c:url value='category/remove/${category.cat_id}' />">Delete</a></td>
 				</tr>
-			</c:forEach>
+		</c:forEach>
 		</table>
 	</c:if>
-	<body>
-</body>
-</html>
+	<%@ include file="Footer.jsp"%>
