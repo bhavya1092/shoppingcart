@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,21 +20,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
-import com.niit.Shoppingbackend.dao.CategoryDAO;
-import com.niit.Shoppingbackend.dao.ProductDAO;
-import com.niit.Shoppingbackend.dao.SupplierDAO;
-import com.niit.Shoppingbackend.modal.Category;
-import com.niit.Shoppingbackend.modal.Product;
-import com.niit.Shoppingbackend.modal.Supplier;
-import com.niit.Shoppingbackend.modal.User;
+import com.niit.shoppingbackend.Dao.CategoryDAO;
+import com.niit.shoppingbackend.Dao.ProductDAO;
+import com.niit.shoppingbackend.Dao.SupplierDAO;
+import com.niit.shoppingbackend.model.Category;
+import com.niit.shoppingbackend.model.Product;
+import com.niit.shoppingbackend.model.Supplier;
+import com.niit.shoppingbackend.model.User;
 
 @Controller
-
-public class ProductController 
-
+public class ProductController
 
 {
 
+	
 	@Autowired
 	ProductDAO productDAO;
 
@@ -53,6 +51,7 @@ public class ProductController
 
 	@Autowired
 	Category category;
+	
 	@Autowired
 	Supplier supplier;
 
@@ -69,7 +68,7 @@ public class ProductController
 	{
 		// RequestParam is used to get values in string format
 
-		System.out.println("viewproduct paaaaaage");
+		System.out.println("viewproduct page");
 		System.out.println("Id:" + id);
 
 		// converting string to int
@@ -89,6 +88,7 @@ public class ProductController
 		return "adminviewproducts";
 	}
 
+	
 	@RequestMapping(value = "/deleteproduct&{id}")
 	public ModelAndView showDeleteProd(@PathVariable("id") String id, Model model) throws Exception 
 	
@@ -126,6 +126,7 @@ public class ProductController
 
 		System.out.println("product addinjnsj list..."+productDAO.list());
 		return mv;
+		
 		
 	}
 
@@ -189,7 +190,8 @@ public class ProductController
 
 				
 		
-		return "adminhome";
+		return "AdminHome";
+		
 	}
 
 	String setName;
@@ -208,6 +210,7 @@ public class ProductController
 		Gson gson = new Gson();
 		result = gson.toJson(plist);
 		return result;
+		
 	}
 	
 	@RequestMapping(value = "/editproducts{id}")

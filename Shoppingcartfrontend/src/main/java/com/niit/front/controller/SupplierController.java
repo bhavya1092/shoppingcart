@@ -12,105 +12,111 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import com.niit.Shoppingbackend.dao.SupplierDAO;
-import com.niit.Shoppingbackend.modal.Category;
-import com.niit.Shoppingbackend.modal.Supplier;
-
-@Controller
-public class SupplierController 
-
-{
-
-@Autowired
-Supplier supplier;
-
-@Autowired
-SupplierDAO supplierDAO;
-
-@ModelAttribute
-public Supplier returnObject2() 
-
-{
-	return new Supplier();
-
-}
-
-@RequestMapping("/AddSupplier")
-public ModelAndView ShowAddSupplier(Model model) 
-
-{
-	
-    	ModelAndView mv = new ModelAndView("AddSupplier");
-     model.addAttribute("supplierList", supplierDAO.list());
-	System.out.println("added supplier details  in controller");
-
-	return mv;
-}
-
-/* action of addsupplier */
-
-@RequestMapping(value = "/addsup", method = RequestMethod.POST)
-public String addSupp  (@Valid @ModelAttribute("supplier") Supplier supp, Model model, BindingResult result, 
-
-HttpServletRequest request) throws IOException
+import com.niit.shoppingbackend.Dao.SupplierDAO;
+import com.niit.shoppingbackend.model.Supplier;
 
 
-{
-	if (supp.getSup_id() == 0) 
-	
+    @Controller
+	public class SupplierController 
+
+
 	{
-		// new supplier, add it
+		
+		@Autowired
+		Supplier supplier;
+		
+		@Autowired
+		SupplierDAO supplierDAO;
 
-		supplierDAO.saveOrUpdate(supp);
-		System.out.println("adding of new supplier in controller");
-	}
+		
+		
+		@RequestMapping("/AddSupplier")
+		public ModelAndView ShowAddSupplier(Model model) 
+
+		{
+			
+		    	ModelAndView mv = new ModelAndView("AddSupplier");
+		      // model.addAttribute("supplierList", supplierDAO.list());
+			   System.out.println("added supplier details  in controller");
+
+			return mv;
+		}
+		
+		
+		@ModelAttribute
+		public Supplier returnObject2() 
+		
+		{
+			return new Supplier();
+
+		}
+
+
+		/* action of addsupplier */
+
+		@RequestMapping(value = "/addsup", method = RequestMethod.POST)
+		public String addSupp (@Valid @ModelAttribute("supplier") Supplier supp, Model model, BindingResult result, HttpServletRequest request) throws IOException
+
+
+		{
+			if ( supp.getSup_id() == 0) 
+			
+			{
+				// new supplier, add it
+
+				supplierDAO.saveOrUpdate(supp);
+				System.out.println("adding of new supplier in controller");
+			}
+			
+
+			return "redirect:/AddSupplier";
+
+		}
+
+		/* delete supplier... */
+		@RequestMapping(value = "/deletesupplier{id}")
+		public ModelAndView showDeleteSupplier(@PathVariable("id") String id, Model model) throws Exception 
+
+		{
+
+			int i = Integer.parseInt(id);
+
+			supplier = supplierDAO.get(i);
+
+			System.out.println("supplier delete");
+
+			ModelAndView mv = new ModelAndView("addsupplier");
+
+			supplierDAO.delete(i);
+			mv.addObject("addsupplier", 0);
+
+			System.out.println("delete Id:" + id);
+
+			return mv;
+
+		}
+
+		/*
+		 * /////////////////////////
+		 */
+
+		@RequestMapping(value = "/editsupplier{id}")
+		public ModelAndView UpdatesuppPage(@PathVariable("id") String id, Model model) throws Exception 
+
+		{
+			
+			int i = Integer.parseInt(id);
+
+			model.addAttribute("supplier", supplierDAO.get(i));
+			model.addAttribute("SupplierList", supplierDAO.list());
+			System.out.println("edit supplier in controller");
+			ModelAndView mv = new ModelAndView("addsupplier");
+			return mv;
+
+			
+		      }
+
+
+     }
 	
-
-	return "redirect:/AddSupplier";
-
-}
-
-/* delete supplier... */
-@RequestMapping(value = "/deletesupplier{id}")
-public ModelAndView showDeleteSupplier(@PathVariable("id") String id, Model model) throws Exception 
-
-{
-
-	int i = Integer.parseInt(id);
-
-	supplier = supplierDAO.get(i);
-
-	System.out.println("supplier delete");
-
-	ModelAndView mv = new ModelAndView("addsupplier");
-
-	supplierDAO.delete(i);
-	mv.addObject("addsupplier", 0);
-
-	System.out.println("delete Id:" + id);
-
-	return mv;
-
-}
-
-/*
- * /////////////////////////
- */
-
-@RequestMapping(value = "/editsupplier{id}")
-public ModelAndView UpdatesuppPage(@PathVariable("id") String id, Model model) throws Exception 
-
-{
 	
-	int i = Integer.parseInt(id);
-
-	model.addAttribute("supplier", supplierDAO.get(i));
-	model.addAttribute("SupplierList", supplierDAO.list());
-	System.out.println("edit supplier in controller");
-	ModelAndView mv = new ModelAndView("addsupplier");
-	return mv;
-
-      }
-
-
-}
