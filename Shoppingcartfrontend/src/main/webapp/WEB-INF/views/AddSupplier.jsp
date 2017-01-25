@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -53,9 +52,9 @@
 <body>
 	<h1>Add a Supplier</h1>
 
-	<c:url var="addAction" value="/supplier/add"></c:url>
+	
 
-	<form:form action="${addAction}" commandName="supplier">
+	<form:form action="addsup" commandName="supplier">
 		<table>
 			<tr>
 				<td><form:label path="sup_id">
@@ -76,10 +75,10 @@
 				<td><form:input path="sup_name" required="true" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="address">
-						<spring:message text="Address" />
+				<td><form:label path="sup_description">
+						<spring:message text="Description" />
 					</form:label></td>
-				<td><form:input path="address" required="true" /></td>
+				<td><form:input path="sup_description" required="true" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><c:if test="${!empty supplier.sup_name}">
@@ -97,7 +96,7 @@
 			<tr>
 				<th width="80">Supplier ID</th>
 				<th width="120">Supplier Name</th>
-				<th width="120">Supplier Address</th>
+				<th width="120">Supplier Description</th>
 				<th width="60">Edit</th>
 				<th width="60">Delete</th>
 			</tr>
@@ -105,12 +104,12 @@
 				<tr>
 					<td>${supplier.sup_id}</td>
 					<td>${supplier.sup_name}</td>
-					<td>${supplier.address}</td>
+					<td>${supplier.sup_description}</td>
 					<td><a href="<c:url value='supplier/edit/${supplier.sup_id}' />">Edit</a></td>
 					<td><a href="<c:url value='supplier/remove/${supplier.sup_id}' />">Delete</a></td>
 				</tr>
 		</c:forEach>
 		</table>
 	</c:if>
- </body>
+</body>
 </html>

@@ -4,18 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" 
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
@@ -47,13 +38,14 @@ p
 </style>
 </head>
 <body>
-	<h1>Gaming zone!!!</h1>
+	
+	<img src="resources/images/footer_logo.png">
 	<p>Shop with a smile</p>
 	<img src="resources/images/images (3).png">
 	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Gaming zone</a>
+			<a class="navbar-brand" href="#">GAME BOX</a>
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="HomePage">Home</a></li>
@@ -63,7 +55,7 @@ p
 			</ul>
 		 <ul class="nav navbar-nav navbar-right">
       <li><a href="registration"><span class="glyphicon glyphicon-user"></span> registration</a></li>
-      <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> login</a></li>
+      <li><a href="login1"><span class="glyphicon glyphicon-log-in"></span> login</a></li>
     </ul>
 		<form class="navbar-form navbar-right">
           <div class="input-group">
@@ -96,31 +88,31 @@ p
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="resources/images/black_ops_2_hd_wallpaper_by_slavory-d4yhj5e.jpg" alt="blackops" width="460" height="345">
+        <img src="resources/images/img8.jpg" alt="blackops" width="460" height="345">
       </div>
 
       <div class="item">
-        <img src="resources/images/Uncharted-4-Wallpaper-HD.jpg" alt="Uncharted" width="500" height="345">
+        <img src="resources/images/img7.jpg" alt="Uncharted" width="500" height="345">
       </div>
     
       <div class="item">
-        <img src="resources/images/god_of_war_4_wallpaper_hd_6_by_sonicx2011-daa8xfq.jpg"alt="god_of _war" width="500" height="400">
+        <img src="resources/images/img9.jpg"alt="god_of _war" width="500" height="400">
       </div>
 
       <div class="item">
-        <img src="resources/images/nike_basketball_wallpaper_by_rhurst-d31f5sq.jpg" alt="nike" width="460" height="345">
+        <img src="resources/images/img3.jpg" alt="nike" width="460" height="345">
       </div>
       
       <div class="item">
-      <img src="resources/images/Awesome-Leo-Messi-HD-Wallpaper.jpg" alt="leo-Messi" width="500" height="450">
+      <img src="resources/images/img10.jpg" alt="leo-Messi" width="500" height="450">
       </div>
       
       <div class="item">
-        <img src="resources/images/Roger-Federer-Tennis-Racquet.jpg" alt="Roger-Federer" width="500" height="400">
+        <img src="resources/images/img4.jpg" alt="Roger-Federer" width="500" height="400">
       </div>
       
       <div class="item">
-        <img src="resources/images/Virat-Kohli-Black-Desktop-Background-HD-Picture.jpg" alt="Virat" width="500" height="345">
+        <img src="resources/images/img6.jpg" alt="Virat" width="500" height="345">
       </div>
     </div>
 
