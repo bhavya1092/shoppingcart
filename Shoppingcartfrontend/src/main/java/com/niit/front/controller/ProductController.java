@@ -1,5 +1,7 @@
 package com.niit.front.controller;
 
+
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,209 +27,183 @@ import com.niit.shoppingbackend.Dao.SupplierDAO;
 import com.niit.shoppingbackend.model.Category;
 import com.niit.shoppingbackend.model.Product;
 import com.niit.shoppingbackend.model.Supplier;
-import com.niit.shoppingbackend.model.User;
 
 @Controller
-public class ProductController
+public class ProductController 
 
 {
 
+	@Autowired
+	private CategoryDAO categoryDAO;
 	
 	@Autowired
-	ProductDAO productDAO;
-
+	private ProductDAO productDAO;
+	
+	@Autowired
+	SupplierDAO supplierDAO;
+	
 	@Autowired
 	Product product;
 	
 	@Autowired
-	User user;
-	
-	@Autowired
-	CategoryDAO categoryDAO;
-	
-	@Autowired
-	SupplierDAO supplierDAO;
-
-	@Autowired
 	Category category;
 	
-	@Autowired
-	Supplier supplier;
-
-	@RequestMapping("/viewproducts")
-	public String ShowViewproducts() 
+	@RequestMapping("/AddProduct" )
+	public ModelAndView addp(Model model)
 	
 	{
-		return "viewproducts";
-	}
-
-	@RequestMapping(value = "/viewdetails")
-	public ModelAndView showViewDetails(@RequestParam("id") String id, Model model) 
-	
-	{
-		// RequestParam is used to get values in string format
-
-		System.out.println("viewproduct page");
-		System.out.println("Id:" + id);
-
-		// converting string to int
-		int i = Integer.parseInt(id);
-		model.addAttribute("productlist", productDAO.list());
-
-		/* get product by id */
-		Product product1 = productDAO.get(i);
-		return new ModelAndView("viewdetails", "product", product1);
-
-	}
-
-	@RequestMapping("/adminviewproducts")
-	public String showAdminViewproducts() 
-	
-	{
-		return "adminviewproducts";
-	}
-
-	
-	@RequestMapping(value = "/deleteproduct&{id}")
-	public ModelAndView showDeleteProd(@PathVariable("id") String id, Model model) throws Exception 
-	
-	{
-
-		int i = Integer.parseInt(id);
-
-		product = productDAO.get(i);
-
-		System.out.println("product delete");
-
-		ModelAndView mv = new ModelAndView("adminviewproducts");
-
-		productDAO.delete(i);
-		mv.addObject("adminviewproducts", 0);
-
-		System.out.println("delete Id:" + id);
-
-		return mv;
-
-	}
-
-	@RequestMapping("/AddProduct")
-	public ModelAndView ShowAddProduct(Model model) 
-	
-	{
-		
-		System.out.println("in product");
+		System.out.println("in add prod page");
 		ModelAndView mv = new ModelAndView("AddProduct");
-
-		/* to get list of categories , supplier id's */
-		model.addAttribute("productList", productDAO.list());
-		model.addAttribute("categoryList", categoryDAO.list());
-		model.addAttribute("supplierList", supplierDAO.list());
-
-		System.out.println("product addinjnsj list..."+productDAO.list());
+		model.addAttribute("productList",productDAO.list());
+		model.addAttribute("categoryList",categoryDAO.list());
+		model.addAttribute("supplierList",supplierDAO.list());
 		return mv;
 		
-		
 	}
-
-	// Creates empty obj and takes values frm user
-
-	@ModelAttribute
-	public Product returnObject() 
 	
+	@ModelAttribute
+	public Product returnObject()
 	{
 		return new Product();
-
 	}
-
-	@RequestMapping(value = "/addProd", method = RequestMethod.POST)
-	public String ShowAddProduct(@Valid @ModelAttribute("product") Product prod, Model model, BindingResult result,HttpServletRequest request) throws IOException 
 	
-	{
-		System.out.println(prod.getProd_name());
-		System.out.println("");
-		System.out.println("my product controller called");
-		MultipartFile image = prod.getImage();
-		Path path;// belong to nio package
-		path = Paths.get("C:/Users/Bhavya/git/shoppingcart/Shoppingcartfrontend/src/main/webapp/resources/images/" + prod.getProd_name() + ".jpg");
-		System.out.println("Path=" + path);
-		System.out.println("File name" + prod.getImage().getOriginalFilename());
-		if (image != null && !image.isEmpty()) 
+		
+		@RequestMapping(value="/addprod", method = RequestMethod.POST)
+	public String Productregister(@Valid @ModelAttribute("product") Product prod,Model model, BindingResult result,
+						HttpServletRequest request) throws IOException 
 		
 		{
-			try 
+					//ModelAndView mv = new ModelAndView("bootstrap");
+			
+					@SuppressWarnings("unused")
+					String filename;
+					@SuppressWarnings("unused")
+					byte[] bytes;
+					System.out.println(prod.getProd_name());
+			
+				System.out.println("image uploaded");
+			
+					System.out.println("myproduct controller called");
+					MultipartFile image = prod.getImage();
+					Path path;
+					path = Paths.get(
+							"C:/Project1_New/shoppingcartfrontend/src/main/webapp/resources/images/" + prod.getProd_name() + ".jpg");
+			
+					System.out.println("Path = " + path);
+					System.out.println("File name = " + prod.getImage().getOriginalFilename());
+					if (image != null && !image.isEmpty())
+					
+					{
+						try
+						
+						{
+							image.transferTo(new File(path.toString()));
+							System.out.println("Image Saved in:" + path.toString());
+						}
+						catch (Exception e)
+						
+						
+						{
+							e.printStackTrace();
+							System.out.println("Image not saved");
+						}
+					}
+					
+					Supplier supplier = supplierDAO.getByName(prod.getSupplier().getSup_name());
+					
+					supplierDAO.saveOrUpdate(supplier);
+
+					Category category = categoryDAO.getName(prod.getCategory().getCatname());
+					
+					categoryDAO.saveOrUpdate(category);
+					prod.setCategory(category);
+					prod.setSupplier(supplier);
+					
+					System.out.println("set");
+					
+					prod.setCat_id(category.getCat_id());
+					prod.setSupp_id(supplier.getSup_id());		
+					
+					productDAO.saveOrUpdate(prod);
+					System.out.println("product added");
+
+					model.addAttribute("message", "Products added successfully");
+					model.addAttribute("productList", productDAO.list());
+
+					return "redirect:/AddProduct";
+					
+				}
+
+		
+		@RequestMapping("/product/edit/{id}") // @ModelAttribute("category"),Category
+		// category
+		public String editCategory(@ModelAttribute("id") Product prod, BindingResult result,
+				HttpServletRequest request, Model model) 
+		
+		
+		{
+			System.out.println("in product editpage ");
+			
+			prod = productDAO.get(product.getProd_id());
+			System.out.println(product.getProd_id());
+			if (category != null)
 			
 			{
-				image.transferTo(new File(path.toString()));
-				System.out.println("Image Saved in:" + path.toString());
+				productDAO.saveOrUpdate(prod);
+				model.addAttribute("message", "Successfully updated");
+				
+				
 			} 
 			
-			catch (Exception e) 
+			
+			else 
+			
 			
 			{
-				e.printStackTrace();
-				//System.out.println("Image not saved");
-
+				model.addAttribute("errorMessage", "Could not be updated");
 			}
 			
+			
+			model.addAttribute("product", product);
+			model.addAttribute("productList", productDAO.list());
+			return "redirect:/addProduct";
 		}
 		
+		
+		String setName;
+		List<Product> plist;
 
-		if (prod.getProd_id() == 0) 
+		@RequestMapping("GsonCon")
+		
+
+		public @ResponseBody String getValues() throws Exception 
 		
 		{
-			//new product
-		    productDAO.saveOrUpdate(prod);
-		
+			String result = "";
+			plist = productDAO.list();
+			Gson gson = new Gson();
+			result = gson.toJson(plist);
+			return result;
 		}
 		
-		else
+		@RequestMapping(value = "/ProductDetails")
+		public ModelAndView showViewDetails(@RequestParam("id") String id, Model model) 
 		
 		{
-			productDAO.saveOrUpdate(prod);
-			return "AddProduct";
+			// RequestParam is used to get values in string format
+
+			System.out.println("product details page");
+			System.out.println("Id:" + id);
+
+			// converting string to int
+			int i = Integer.parseInt(id);
+			model.addAttribute("productlist", productDAO.list());
+
+			/* get product by id */
+			Product product1 = productDAO.get(i);
+			return new ModelAndView("ProductDetails", "product", product1);
+
 		}
 
-				
-		
-		return "AdminHome";
-		
-	}
-
-	String setName;
-	List<Product> plist;
-
-	@RequestMapping("GsonCon")
-	// @ResponseBody is used whenever angularjs is used
-	// for filtering and sorting -angular js
-	// (google)gson converts java obj into json(java script obj)
-
-	public @ResponseBody String getValues() throws Exception 
-	
-	{
-		String result = "";
-		plist = productDAO.list();
-		Gson gson = new Gson();
-		result = gson.toJson(plist);
-		return result;
-		
-	}
-	
-	@RequestMapping(value = "/editproducts{id}")
-	public ModelAndView updateProdPage(@PathVariable("id") String id, Model model) throws Exception 
-	
-	{
-		
-		int i = Integer.parseInt(id);
-
-		model.addAttribute("product", productDAO.get(i));
-		model.addAttribute("productList", productDAO.list());
-		model.addAttribute("supplierList", supplierDAO.list());
-		model.addAttribute("categoryList", categoryDAO.list());
-		
-		System.out.println("edit product in controller");
-		ModelAndView mv = new ModelAndView("AddProduct");
-		return mv;
-
-	}
 
 }

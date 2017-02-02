@@ -36,10 +36,11 @@ import com.niit.shoppingbackend.model.Supplier;
 		{
 			
 		    	ModelAndView mv = new ModelAndView("AddSupplier");
-		      // model.addAttribute("supplierList", supplierDAO.list());
+		        model.addAttribute("supplierList", supplierDAO.list());
 			   System.out.println("added supplier details  in controller");
 
 			return mv;
+			
 		}
 		
 		
@@ -59,6 +60,7 @@ import com.niit.shoppingbackend.model.Supplier;
 
 
 		{
+			
 			if ( supp.getSup_id() == 0) 
 			
 			{

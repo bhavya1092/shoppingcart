@@ -3,9 +3,13 @@ package com.niit.front.controller;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.niit.shoppingbackend.Dao.UserDAO;
 import com.niit.shoppingbackend.model.User;
 
+@Controller
 public class UserController
 
 {
@@ -24,40 +29,12 @@ public class UserController
 	UserDAO userDAO;
 
 	@Autowired
-	User user;
+    User user;
+	
+	@Autowired
+	SessionFactory sessionFactory; 
 
-	@RequestMapping("/isValidUser")
-	public ModelAndView isValidate(@RequestParam(value = "name") String name,
-			@RequestParam(value = "password") String password)
-
-	{
-
-		System.out.println("in controller");
-		@SuppressWarnings("unused")
-		String message;
-		ModelAndView mv;
-		if (userDAO.isValidate(name, password))
-
-		{
-
-			message = "valid credientals";
-			mv = new ModelAndView("AdminHome");
-
-		}
-
-		else
-
-		{
-
-			message = "invalid credientals";
-			mv = new ModelAndView("login");
-
-		}
-
-		return mv;
-
-	}
-
+		
 	@RequestMapping("/perform_logout")
 	public ModelAndView showLogout(HttpServletRequest request, HttpSession session)
 
@@ -91,6 +68,7 @@ public class UserController
 	public User returnObject()
 
 	{
+		
 		return new User();
 
 	}
@@ -106,8 +84,7 @@ public class UserController
 		user.setEnabled("true");
 		user.setRole("ROLE_USER");
 
-		if (user.getCpassword().equals(user.getPassword()))
-			;
+		if (user.getCpassword().equals(user.getPassword()));
 
 		{
 
@@ -124,19 +101,18 @@ public class UserController
 	@RequestMapping(value = "/login_session_attributes")
 	/* getting values from textbox */
 
-	public String login_session_attributes(HttpSession session, Model model,
-			@RequestParam(value = "username") String id)
+	public String login_session_attributes(HttpSession session, Model model, @RequestParam(value = "username") String id)
 
 	{
 
+		
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
-
-		System.out.println("inside security check");
-
-		session.setAttribute("name", name);
+        System.out.println("inside security check");
+        session.setAttribute("name", name);
 		System.out.println(name);
-
-		user = userDAO.get(id);
+		Session s=sessionFactory.getCurrentSession();
+		Transaction t=s.beginTransaction();
+        user = userDAO.get(name);
 		int x = user.getUserid();
 		session.setAttribute("email", user.getEmail());
 		session.setAttribute("loggedInUser", user.getUsername());
@@ -168,12 +144,14 @@ public class UserController
 
 			}
 
+			
 			else
 
 				session.setAttribute("isAdmin", "true");
 
 		}
-
+		
+		t.commit();
 		return "AdminHome";
 
 	}

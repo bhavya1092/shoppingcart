@@ -44,7 +44,7 @@ import com.niit.shoppingbackend.model.Category;
 					
 					ModelAndView mv = new ModelAndView("AddCategory");
 
-				//model.addAttribute("categoryList", categoryDAO.list());
+				model.addAttribute("categoryList", categoryDAO.list());
 					System.out.println("added category details  in controller");
 
 					return mv;
@@ -60,17 +60,12 @@ import com.niit.shoppingbackend.model.Category;
 				public String addCate(@Valid @ModelAttribute("category") Category cate, Model model, BindingResult result,HttpServletRequest request) throws IOException
 				
 				{
-					if (cate.getCat_id() == 0) 
-					
-					{
-						
-						// new category, add it
-
+			
 						categoryDAO.saveOrUpdate(cate);
 						System.out.println("adding of new category in controller");
 						
-					} 
-					
+					 
+					model.addAttribute("categoryList", categoryDAO.list());
 					return "redirect:/AddCategory";
 
 				}
