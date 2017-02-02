@@ -8,16 +8,20 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.stereotype.Component;
+
 
 @Entity
 @Table (name="user")
-public class User 
+@Component
+public class User implements java.io.Serializable
 
 {
 
 	    @Id
 		@GeneratedValue(strategy=GenerationType.AUTO)
 		
+	    
 		private int userid;
 		
 	    @NotNull(message="name cannot left blank")

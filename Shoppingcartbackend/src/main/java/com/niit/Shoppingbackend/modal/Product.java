@@ -36,16 +36,28 @@ public class Product
 	private MultipartFile image;
 	
 	@ManyToOne
-	@JoinColumn(name = "cat_Id", insertable = false, updatable = false)
+	@JoinColumn(name = "cat_id", insertable = false, updatable = false)
 
 	private Category category;
-	private int cat_Id;
+	private int cat_id;
 	
 	@ManyToOne
-	@JoinColumn(name = "supp_Id", insertable = false, updatable = false)
+	@JoinColumn(name = "supp_id", insertable = false, updatable = false)
 	private Supplier supplier;
 
-	private int supp_Id;
+	public int getCat_id() {
+		return cat_id;
+	}
+	public void setCat_id(int cat_id) {
+		this.cat_id = cat_id;
+	}
+	public int getSupp_id() {
+		return supp_id;
+	}
+	public void setSupp_id(int supp_id) {
+		this.supp_id = supp_id;
+	}
+	private int supp_id;
 	
 	public Category getCategory() 
 	{
@@ -65,24 +77,7 @@ public class Product
 		this.supplier = supplier;
 	}
 	
-	public int getCat_Id()
-	{
-		return cat_Id;
-	}
-	public void setCat_Id(int cat_Id) 
-	{
-		this.cat_Id = cat_Id;
-	}
-	public int getSupp_Id() 
-	{
-		return supp_Id;
-	}
-	public void setSupp_Id(int supp_Id) 
-	{
-		this.supp_Id = supp_Id;
-	}
-	
-	public MultipartFile getImage() 
+		public MultipartFile getImage() 
 	
 	{
 		return image;
