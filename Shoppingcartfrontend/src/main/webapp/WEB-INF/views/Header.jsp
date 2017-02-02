@@ -1,39 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256"
 	pageEncoding="windows-1256"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style>
- background-image:url("img2.jpg");
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover:not(.active) {
-    background-color:#111 ;
-}
-
-.active {
-    background-color:#4CAF50 ;
-} 
-</style>
 <meta http-equiv="Content-Type"content="text/html; charset=windows-1256">
 <title>Home page</title>
 <!-- adding predefined links of bootstrap -->
@@ -41,22 +14,43 @@ li a:hover:not(.active) {
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-<td>welcome ${loggedInUser}</td>
-<!-- adding menu bar(nav bar) -->
-</head>
-<body>
-<ul>
-  <li><a class="active" href="Home">Home</a></li>
-  <li><a href="news">News</a></li>
-  <li><a href="contact">Contact</a></li>
-  <li><a href="about">About</a></li>
-</ul>
+<style>
 
-</body>
-</html>
+ .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 60%;
+      margin: auto;
+      
+}
+  
+body
 
+<h2 style="background-color:green">
+</h2>
+
+{
+	background-color: powderblue;
+}
+
+
+p 
+{
+	color: blue;
+}
+
+body{
+background-image:url("resources/images/b3.jpg");
+background-repeat:no-repeat;
+background-size:cover;
+}
+
+</style>
+
+</head>
+
+<body>
+<img src="resources/images/footer_logo.png">
+<h4>welcome ${loggedInUser}</h4>
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -69,12 +63,21 @@ li a:hover:not(.active) {
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="index">Home</a></li>
-				<li><a href="aboutus">About Us</a></li>
-				<li><a href="viewproducts">Products</a></li>
+			
+			<a class="navbar-brand" href="GAME BOX">GAME BOX</a>
+				<li class="active"><a href="Home">Home</a></li>
+				
+				<li><a href="AboutUs">About Us</a></li>
+				<li class="active"><a href="ContactUs">Contact Us</a><li>
+				<li><a href="Product">Products</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<c:choose>
+				
+				<button type="button" class="btn btn-info">
+    <span class="glyphicon glyphicon-search"></span> Search
+  </button>
+					
 					<c:when test="${empty loggedInUser}">
 						<li><a href="memberShip.obj"><span
 								class="glyphicon glyphicon-user"></span> Sign-up</a></li>
@@ -88,8 +91,8 @@ li a:hover:not(.active) {
 								class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 					</c:when>
 				</c:choose>
+			
 			</ul>
 		</div>
 	</div>
 	</nav>
-	

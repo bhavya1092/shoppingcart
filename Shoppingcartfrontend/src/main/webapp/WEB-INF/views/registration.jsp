@@ -1,63 +1,153 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Register Here</title>
-</head>
-<body>
-      <div class="container">
-	<form:form  method='post' action="addus" commandName="user">
-		<fieldset>
-			<legend>Registration Form</legend>
-			<div class="control-group">
-				<label class="control-label">Username</label>
-				<div class="controls">
-					<form:input type="text" path="username"></form:input>
+<%-- <%@include file="Header.jsp" %>
+<h1></h1>
+
+<h2>Please fill the details</h2>
+
+	<form:form commandName="user" method="post" action="addus">
+		<table>
+		
+			<tr>
+				<td>User Name:</td>
+				<td><form:input type="text" name="name" path="username"></form:input></td>
+			</tr>
+		
+		<tr>
+				<td>Email ID:</td>
+				<td><form:input type="email ID" name="email" path="emailid"></form:input></td>
+			</tr>
+			
+		
+			
+			<tr>
+				<td>Password:</td>
+				<td><form:input type="text" name="password" path="password"></form:input></td>
+			</tr>
+			
+			<tr>
+				<td> Confirm Password:</td>
+				<td><form:input type="text" name="password" path="confirmpassword"></form:input></td>
+			</tr>
+			
+			<tr>
+				<td>Mobile No:</td>
+				<td><form:input type="text" name="mobile" path="phno"></form:input></td>
+			</tr>
+				
+			
+			<tr>
+				<td><input type="submit" value="Register">
+				<td><input type="reset" value="Reset">
+			</tr>
+			
+		</table>
+
+	</form:form>
+
+<%@ include file="Footer.jsp"%> --%>
+
+<%@include file="Header.jsp"%>
+
+<style>
+
+td {
+	font-size: 20px;
+}
+</style>
+
+<center>
+	<h1>Registration</h1>
+	<p>
+		ALREADY REGISTERED? <a href="login">SIGN IN</a>
+	</p>
+
+	<form:form commandName="us">
+
+		<table>
+			<tr>
+				<td>Name</td>
+				<td><form:input type="text" path="username" /></td>
+			</tr>
+			<!-- to display validation messages -->
+			<c:forEach
+				items="${flowRequestContext.messageContext.getMessagesBySource('username')}"
+				var="err">
+				<div>
+					<span>${err.text}</span>
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Password</label>
-				<div class="controls">
-					<form:input type="text" path="password"></form:input>
+			</c:forEach>
+
+			<tr>
+				<td>Enter Password</td>
+				<td><form:input type="password" path="password" /></td>
+			</tr>
+			<!-- to display validation messages -->
+			<c:forEach
+				items="${flowRequestContext.messageContext.getMessagesBySource('password')}"
+				var="err">
+				<div>
+					<span>${err.text}</span>
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Confirm Password</label>
-				<div class="controls">
-					<form:input type="text" path="cpassword"></form:input>
+			</c:forEach>
+
+			<tr>
+				<td>Enter Confirmed Password</td>
+				<td><form:input type="password" path="cpassword" /></td>
+			</tr>
+			<!-- to display validation messages -->
+			<c:forEach
+				items="${flowRequestContext.messageContext.getMessagesBySource('cpassword')}"
+				var="err">
+				<div>
+					<span>${err.text}</span>
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Email</label>
-				<div class="controls">
-					<form:input type="text" path="email"></form:input>
-					</div>
+			</c:forEach>
+			<tr>
+				<td>Email Id</td>
+				<td><form:input type="email" path="email" /></td>
+			</tr>
+			<!-- to display validation messages -->
+			<c:forEach
+				items="${flowRequestContext.messageContext.getMessagesBySource('email')}"
+				var="err">
+				<div>
+					<span>${err.text}</span>
 				</div>
-				<div class="control-group">
-				<label class="control-label">Phno</label>
-				<div class="controls">
-					<form:input type="text" path="phno"></form:input>
-						</div>
-					</div>
-					
-					<div class="control-group">
-				<label class="control-label">Submit</label>
-				<div class="controls">
-					<form:input type="text" path=""></form:input>
-					</div>
-					</div>
-					<div class="control-group">
-				<label class="control-label">button</label>
-				<div class="controls">
-					<form:input type="text" path=""></form:input>
-					</div>
-					</div>
-					</fieldset>
-				</form:form>
-			</div>
-</body>
-</html>
+			</c:forEach>
+
+
+
+			<tr>
+				<td>Phone no.</td>
+				<td><form:input type="text" path="phno" /></td>
+			</tr>
+			<!-- to display validation messages -->
+			<c:forEach
+				items="${flowRequestContext.messageContext.getMessagesBySource('phno')}"
+				var="err">
+				<div>
+					<span>${err.text}</span>
+				</div>
+			</c:forEach>
+
+
+
+			<tr>
+				<td><input type="CHECKBOX" NAME="OFFER" CHECKED>I agree
+					to receive information about exciting offers</td>
+			</tr>
+		</table>
+
+		<br />
+		<br />
+
+
+		<div class="center">
+			<input type="submit" name="_eventId_submit" value="submit">
+		</div>
+
+	</form:form>
+	
+
+</center>
+<br />
+<%@ include file="Footer.jsp"%>
