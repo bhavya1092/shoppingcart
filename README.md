@@ -16,10 +16,10 @@ The different modules in this project are: 1.User 2.Supplier 3.Product 4.Categor
 1.Spring 4 2.Hibernate 5 3.JSP 4.CSS 5.Bootstrap
 
 #Database:
-H2 database 
+H2 database <a><href "http://www.h2database.com/html/download.html"></a> Click Here
 
 #Server:
-Apache Tomcat 8
+Apache Tomcat 8 <a> <href "https://tomcat.apache.org/download-80.cgi"></a> Click Here
 
 #JDK 1.8 :
-To download jdk 
+To download jdk <a> <href "http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html"> </a> Click Here
