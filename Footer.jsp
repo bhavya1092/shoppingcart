@@ -1,35 +1,24 @@
-<div class="footer">
-
-	<div class="pw tc">
-
-		<p class="footer_logo">
-			<img src="/resources/images/footer_logo.png">
-		</p>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br><br><br><br><br><br>
-		<p class="footer_link"><center>
-	
-			<a text-align: center> </a>
-			<a href="/contact us.shtml">CONTACT US</a> |  
-			<a href="/privacy policy.shtml">PRIVACY POLICY</a> | 
-			<a href="/terms of service.shtml">TERMS OF SERVICE</a>  |  
-			
-			</center>
-		</p>
-		
-	     </div>
-         </div>
-         
-         
-        <br> <br> <br> <br> <br> <br><br><br><br><br>
-		<div align="justify"></div>
-		<p>Copyright 2016 @Bhavya.com</p>
-		<span class="glyphicon glyphicon-copyright-mark" style="color: black"></span>
-		
-		</body>
-		</html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<meta charset="utf-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>  
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<br>
+<br>
+<br>
+<div align="justify">
+</div>
+Copyright  <span class="glyphicon glyphicon-copyright-mark" style="color: black"></span> 
+2016 @Bhavya.com
+</head>
+<body>
+</body>
+</html>
